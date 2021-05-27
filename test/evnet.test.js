@@ -282,7 +282,7 @@ describe('evnet', function () {
 
       (function () {
         e.emit('HELLO', a)
-      }).should.throwError('Converting circular structure to JSON')
+      }).should.throwError(Error.message, 'Converting circular structure to JSON')
       e.close()
       server.close()
     })
