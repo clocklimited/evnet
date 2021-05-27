@@ -1,4 +1,4 @@
-var zeromq = require('zeromq')
+var zeromq = require('zeromq/v5-compat')
   , EventEmitter = require('events').EventEmitter
 
 module.exports = evnet
@@ -26,8 +26,8 @@ function start(ip, repPort, pubPort) {
   var repSocket = zeromq.socket('pull')
   var pubSocket = zeromq.socket('pub')
 
-  repSocket.bindSync('tcp://' + ip + ':' + self.ports[0])
-  pubSocket.bindSync('tcp://' + ip + ':' + self.ports[1])
+  repSocket.bind('tcp://' + ip + ':' + self.ports[0])
+  pubSocket.bind('tcp://' + ip + ':' + self.ports[1])
 
   repSocket.on('message', function (packet) {
     pubSocket.send(packet)
